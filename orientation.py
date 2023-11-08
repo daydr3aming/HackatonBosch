@@ -36,14 +36,14 @@ def orientation(image):
         # cv.drawMatchesKnn expects list of lists as matches.
         img3 = cv.drawMatchesKnn(roi_original,kp1,roi_comparacion,kp2,good,None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
         if len(good) > 1:
-            return "Si jala"
+            return "Go"
         else:
-            return "Nel brah"
+            return "No Go"
         
         #plt.imshow(img3),plt.show()
 
     except:
-        return "No jalo :("
+        return "No Go"
         
 
 print(orientation("1.png"))
