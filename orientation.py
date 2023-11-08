@@ -1,5 +1,8 @@
 import numpy as np
 import cv2 as cv
+
+
+import os
 import matplotlib.pyplot as plt
 
 def orientation(image):
@@ -45,5 +48,9 @@ def orientation(image):
     except:
         return "No Go"
         
+    
 
-print(orientation("1.png"))
+images = [1, 2, 4, 8, 9, 11, 12, 14, 18, 19, 20, 21, 22, 24, 26, 27, 28, 29, 32, 36]
+
+for i in range (0, len(images)):
+    print(orientation(str(images[i]) + ".png"))
