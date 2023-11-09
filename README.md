@@ -6,4 +6,8 @@
 <p> Los nombres de las imagenes tienen que coincidir con los siguientes números: 1, 2, 4, 8, 9, 11, 12, 14, 18, 19, 20, 21, 22, 24, 26, 27, 28, 29, 32, 36 </p>
 <p> Las principales librerías implementadas son numpy, opencv, mathplot, tkinter</p>
 
+
+<p> Para tratar de instalar las dependencias con un script: </p>
+<p> En la terminal: chmod +x install.sh ó sudo chmod +x install.sh </p>
+<p> Correrlo: ./install.sh</p>
 <p> La aplicación mostrará una interfáz donde despliega todos los resultados obtenidos</p>
