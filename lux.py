@@ -54,6 +54,7 @@ promedio_b4 = np.mean(b4)
 valoresR = [promedio_r, promedio_r2, promedio_r3, promedio_r4]
 valoresG = [promedio_g, promedio_g2, promedio_g3, promedio_g4]
 valoresB = [promedio_b, promedio_b2, promedio_b3, promedio_b4]
+
 promedioFinalR = np.mean(valoresR)
 promedioFinalG = np.mean(valoresG)
 promedioFinalB = np.mean(valoresB)
