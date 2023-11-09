@@ -39,7 +39,7 @@ try:
     else:
         print("No Go")
     
-    #plt.imshow(img3),plt.show()
+    plt.imshow(img3),plt.show()
 
 except:
     print("No Go")

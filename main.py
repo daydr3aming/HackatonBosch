@@ -1,6 +1,10 @@
 import numpy as np
 import cv2 as cv
 
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import ttk
+
 import matplotlib.pyplot as plt
 
 images = [1, 2, 4, 8, 9, 11, 12, 14, 18, 19, 20, 21, 22, 24, 26, 27, 28, 29, 32, 36]
@@ -39,14 +43,14 @@ def orientacion(image):
         # cv.drawMatchesKnn expects list of lists as matches.
         img3 = cv.drawMatchesKnn(roi_original,kp1,roi_comparacion,kp2,good,None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
         if len(good) > 1:
-            return "Pasa la prueba"
+            return "Go"
         else:
-            return "Falla la prueba"
+            return "No Go"
         
-        #plt.imshow(img3),plt.show()
+        plt.imshow(img3),plt.show()
 
     except:
-        return "Falla la prueba"
+        return "No go"
 
 def intensidad(image):
 
@@ -136,37 +140,18 @@ def centradoFinal(image):
         distance = np.sqrt((x- x2)**2 + (y - y2)**2)
         if distance < 0:
             distance = distance * -1
-        #print("distance: " + str(distance))        
-        if(distance > 10):
-            #print("Mayor de 10")
-            return "Falla la prueba"
-            #break
-        else:
-            #print("Menor de 10")
-            return "Pasa la prueba"
-
-    #img[dst>0.1*dst.max()]=[0,0,255]
-    #cv2.imshow('image', img)
-
-    #img2[dst2>0.1*dst2.max()]=[0,0,255]
-    #cv2.imshow('image2', img2)
-    #cv2.waitKey(0)
-    #cv2.destroyAllWindows
+        return distance
 
 
-out = ['#', 'Nitidez', 'Red Intensity', 'Green Intensity', 'Blue Intensity', 'Centrado', 'Orientacion']
-
-#''' #
-num = ['#', 1, 2, 4, 8, 9, 11, 12, 14, 18, 19, 20, 21, 22, 24, 26, 27, 28, 29, 32, 36]
-out[0] = num
-#'''
+out = [None, None, None, None, None, None]
+fields = ['#', 'Nitidez', 'Red Intensity', 'Green Intensity', 'Blue Intensity', 'Centrado', 'Orientacion']
 
 #''' Orientacion
 orient = ['Orientacion']
 for i in range (0, len(images)):
     orient.append(orientacion(str(images[i]) + ".png"))
 
-out[6] = orient
+out[5] = orient
 #'''
 
 #''' Intensidad
@@ -180,19 +165,43 @@ for i in range(0, len(images)):
     green.append(results[1])
     blue.append(results[2])
 
-out[2] = red
-out[3] = green
-out[4] = blue
+out[1] = red
+out[2] = green
+out[3] = blue
 
 #'''
-
 #''' Centrado final
 cent = ['Centrado']
 for i in range (0, len(images)):
     cent.append(centradoFinal(str(images[i]) + ".png"))
 
-out[5] = cent
+out[4] = cent
 #'''
 
-for i in range(0, 7):
+for i in range(0, 6):
     print(out[i])
+
+app = tk.Tk()
+app.title("Table Example")
+
+# Create a Treeview widget for the table
+table = ttk.Treeview(app, columns=fields, show="headings")
+
+# Define column headings
+for col in fields:
+    table.heading(col, text=col)
+    table.column(col, width=100)  # Adjust the width as needed
+
+# Insert data from the 'num' list into the table
+for i, data in enumerate(images, start=1):  # Start enumeration from 1
+    table.insert("", "end", values=[data, "", out[1][i], out[2][i], out[3][i], out[4][i], out[5][i]])
+print(out[1][5])
+# Add a scrollbar
+scrollbar = ttk.Scrollbar(app, orient="vertical", command=table.yview)
+table.configure(yscrollcommand=scrollbar.set)
+scrollbar.pack(side="right", fill="y")
+
+# Pack the table
+table.pack()
+
+app.mainloop()
