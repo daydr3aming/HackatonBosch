@@ -11,12 +11,12 @@ def valor_aleatorio():
     return random.randint(1, 4)
 
 
-# Cargar la imagen original
+
 img = cv.imread("Images/REF_23.png", cv.IMREAD_COLOR)  # Asegúrate de cargar la imagen en color
 
 
 img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)  
-# Definir las coordenadas del ROI
+
 x1, y1, x2, y2 = 350, 170, 100, 135
 
 # Obtener la región de interés (ROI)
@@ -92,25 +92,20 @@ plt.ylabel('MTF')
 plt.title('Modulation Transfer Function')
 plt.grid(True)
 plt.show()
-#'''
+
 # ESF
-# Crear una figura y un eje para el gráfico
 plt.figure(figsize=(10, 4))
 plt.plot(valores, label="ESF")
 
-# Agregar etiquetas y título
+
 plt.xlabel("Píxeles")
 plt.ylabel("Intensidad")
 plt.title("ESF")
-
-# Mostrar la leyenda
 plt.legend()
-
-# Mostrar el gráfico
 plt.show()
 
-# Mostrar la imagen original con los bordes superpuestos en la ROI
+
 plt.imshow(cv.cvtColor(roi, cv.COLOR_BGR2RGB))
 plt.show()
-#'''
+
 

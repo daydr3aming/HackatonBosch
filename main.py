@@ -19,28 +19,23 @@ def orientacion(image):
     roi_original = img1[y1:y1+y2, x1:x1+x2]
     roi_comparacion = img2[y1:y1+y2, x1:x1+x2]
 
-    #cv.imwrite('roi_original.jpg', roi_original)
-    #cv.imwrite('roi_comparacion.jpg', roi_comparacion)
-    #plt.imshow(roi_comparacion),plt.show()
-    #plt.imshow(roi_original),plt.show()
 
-    # Initiate SIFT detector
+    # Creamos la instancia de SIFT con sus Keypoints y descriptors 
     sift = cv.SIFT_create()
-    # find the keypoints and descriptors with SIFT
+
     kp1, des1 = sift.detectAndCompute(roi_original,None)
     kp2, des2 = sift.detectAndCompute(roi_comparacion,None)
-    # BFMatcher with default params
+
     bf = cv.BFMatcher()
 
     try:
         matches = bf.knnMatch(des1,des2,k=2)
 
-        # Apply ratio test
         good = []
         for m,n in matches:
             if m.distance < 1.00 * n.distance:
                 good.append([m])
-        # cv.drawMatchesKnn expects list of lists as matches.
+        # Checamos si hay algun match, si no, es por que está rotada
         img3 = cv.drawMatchesKnn(roi_original,kp1,roi_comparacion,kp2,good,None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
         if len(good) > 1:
             return "Go"
@@ -71,12 +66,6 @@ def intensidad(image):
     b2, g2, r2 = cv.split(roi2)
     b3, g3, r3 = cv.split(roi3)
     b4, g4, r4 = cv.split(roi4)
-
-    #cv.imshow("lol",roi)
-    #cv.imshow("lol2",roi2)
-    #cv.imshow("lol3",roi3)
-    #cv.imshow("lol4",roi4)
-    #cv.waitKey(0)
 
     # Calcula el promedio de intensidad para cada canal
     promedio_r = np.mean(r)
