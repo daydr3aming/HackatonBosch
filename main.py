@@ -98,7 +98,7 @@ def intensidad(image):
     #print(f"Promedio del canal Azul (B): {promedioFinalB}")
 
 def centradoFinal(image):
-
+    # Utilizamos el Harris Corner Detection implementado en OpenCv para poder detectar puntos
     img = cv.imread('Images/REF_23.png')
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     gray = np.float32(gray)
