@@ -15,22 +15,6 @@ def valor_aleatorio():
 img = cv.imread("Images/REF_23.png", cv.IMREAD_COLOR)  # Asegúrate de cargar la imagen en color
 
 
-
-coordenadas = "34.3 53.9, 35.8 54.9, 38.4 55, 41.0 55.6 , 43.41 56.2, 45.1 56.5 , 46.3 56.2, 47.7 57.1 , 48.6 57.4 , 49.5 58.2 , 51.5 58.5, 53.0 59.1 , 54.5 59.1"
-
-# Dividir las coordenadas basadas en la coma
-pares_coordenadas = coordenadas.split(", ")
-
-# Inicializar una lista para almacenar los resultados
-resultados = []
-
-# Iterar sobre cada par de coordenadas
-for par in pares_coordenadas:
-    x, y = map(float, par.split())
-    resultados.append((x, y))
-
-
-
 img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)  
 # Definir las coordenadas del ROI
 x1, y1, x2, y2 = 350, 170, 100, 135
@@ -39,16 +23,11 @@ x1, y1, x2, y2 = 350, 170, 100, 135
 roi = img_gray[y1:y1+y2, x1:x1+x2]
 
 valores = []
-'''
+
 for i in range(1,97):
     intensity = roi[i,i+1]
     valores.append(intensity)
-'''
 
-# Imprimir la lista de resultados
-for i, (x, y) in enumerate(resultados, 1):
-    intensity = roi[int(x),int(y)]
-    valores.append(intensity)
 
 #print(valores)
 #valores = [valor / max(valores) for valor in valores]
@@ -83,7 +62,7 @@ mtf = np.abs(lsf_fourier)
 pixel_size = 0.01  # Tamaño del píxel en mm
 nyquist_frequency = 1 / (2 * pixel_size)
 
-frequencies = np.fft.fftfreq(len(resultados_derivada))
+frequencies = np.fft.fftfreq(len(resultados_derivada), d=pixel_size)
 
 n = len(lsf_fourier)
 
