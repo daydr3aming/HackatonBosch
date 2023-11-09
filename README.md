@@ -4,6 +4,6 @@
 <p> Si existe una Imagen de base diferente a los ejemplos, se tiene que llamar REF_23.png, para que el programa funcione de manera adecuada </p>
 <p> Para ejecutar el programa se tiene que usar el comando "python main.py"</p>
 <p> Los nombres de las imagenes tienen que coincidir con los siguientes números: 1, 2, 4, 8, 9, 11, 12, 14, 18, 19, 20, 21, 22, 24, 26, 27, 28, 29, 32, 36 </p>
-<p> Las principales librerías implementadas son numpy, opencv, mathplot </p>
+<p> Las principales librerías implementadas son numpy, opencv, mathplot, tkinter</p>
 
 <p> La aplicación mostrará una interfáz donde despliega todos los resultados obtenidos</p>
