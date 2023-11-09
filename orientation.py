@@ -5,6 +5,21 @@ import cv2 as cv
 import os
 import matplotlib.pyplot as plt
 
+
+def intensity(image):
+
+    img = cv.imread('Images/' + image)
+    x1, y1, x2, y2 = 200, 50, 100, 100 
+    roi = img[y1:y1+y2, x1:x1+x2]
+    intensidad_promedio = np.mean(roi)
+    #plt.imshow(roi),plt.show()
+    mean_red = np.mean(roi[:, :, 0])  # Red channel
+    mean_green = np.mean(roi[:, :, 1])  # Green channel
+    mean_blue = np.mean(roi[:, :, 2])  # Blue channel
+    
+    return mean_red, mean_green, mean_blue, intensidad_promedio
+
+
 def orientation(image):
 
     img1 = cv.imread('Images/REF_23.png',cv.IMREAD_GRAYSCALE)          # queryImage
@@ -54,3 +69,29 @@ images = [1, 2, 4, 8, 9, 11, 12, 14, 18, 19, 20, 21, 22, 24, 26, 27, 28, 29, 32,
 
 for i in range (0, len(images)):
     print(orientation(str(images[i]) + ".png"))
+
+intesityresults = (intensity("REF_23" + ".png"))
+
+print("REF_23_IMAGE: ")
+print("Red: ")
+print(intesityresults[0])
+print("Green: ")
+print(intesityresults[1])
+print("Blue: ")
+print(intesityresults[2])
+print("Mean intensity: ")
+print(intesityresults[3])
+print(" ")
+
+for i in range(0, len(images)):
+    results = intensity(str(images[i]) + ".png")
+    print("IMAGE: " + str(images[i]) + ".png")
+    print("Red: ")
+    print(results[0])
+    print("Green: ")
+    print(results[1])
+    print("Blue: ")
+    print(results[2])
+    print("Mean intensity: ")
+    print(results[3])
+    print(" ")
